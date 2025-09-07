@@ -55,7 +55,7 @@ const Case2 = () => {
 const Case3 = () => {
   const dateObject = new Date();
   const result1 = formatDate(dateObject);
-  const result2 = formatDate("2025/12/1");
+  const result2 = formatDate("2025-12-01");
 
   return (
     <>
