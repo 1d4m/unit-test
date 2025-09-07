@@ -16,6 +16,6 @@ describe("ロジックコンポーネント", () => {
 
   it("formatDate関数", () => {
     expect(formatDate(new Date(2025, 8, 7))).toBe("2025/09/07"); // Dateインスタンスが渡った場合
-    expect(formatDate("2025/12/1")).toBe("2025/12/01");
+    expect(formatDate("2025-12-01")).toBe("2025/12/01");
   });
 });
