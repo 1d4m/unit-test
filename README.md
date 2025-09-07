@@ -1,69 +1,116 @@
-# React + TypeScript + Vite
+## フロントエンド単体テスト
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+使用技術
 
-Currently, two official plugins are available:
+- テストランナー：vitest
+- テンティングライブラリ：react-testing-library
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+単体テストの種類
 
-## Expanding the ESLint configuration
+- ロジック/関数のテスト
+- 状態(state)のテスト
+- 描画(rendering)のテスト
+- イベントのテスト
+- props のテスト
+- コンテキストのテスト
+- 非同期処理のテスト
+- 副作用(useEffect)のテスト
+- 特殊ケースのテスト（エッジケース・エラーバウンダリ・a11y）
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+環境
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- vite, vitest
+- テストティングライブラリ：react-testing-library
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+テストを走らせるところまでやる
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+自動テストは目的ではないから、ci は構築しない。
+あくまで単体テストの手法を深めることが目的。
+だから、ブランチも main のみでいく。
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+不明点
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- vite 環境の場合、vitest は npx install vitest するだけでいいのか？
+- config ファイルとかはいじらなくていいの？
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## React ユニットテスト学習用課題リスト
+
+### ロジック/関数のテスト
+
+- [] sum(a, b) 関数を作り、入力に応じて正しい結果を返すテストを書く
+
+- [] isEven(n) 関数を作り、偶数/奇数の判定をテストする
+
+- [] formatDate(date) 関数を作り、日付文字列を YYYY/MM/DD に変換するテスト
+
+### 状態 (state) のテスト
+
+- [] Counter コンポーネントを作り、初期値 0 で表示されることをテスト
+
+- [] ボタンをクリックして count が 1 ずつ増えることをテスト
+
+- [] 複数回クリックした場合の挙動をテスト
+
+- [] useReducer を使って INCREMENT / DECREMENT の動作をテスト
+
+### 描画 (rendering) のテスト
+
+- [] Hello コンポーネントに name props を渡して "Hello, {name}" が表示されることをテスト
+
+- [] UserList コンポーネントで users.length=3 のとき <li> が 3 つ表示されることをテスト
+
+- [] 条件分岐（例: loading=true → "Loading…" 表示、false → データ表示）をテスト
+
+### イベントのテスト
+
+- [] ボタンクリックでコールバック関数が呼ばれることをテスト
+
+- [] テキスト入力フォームで文字を入力すると state が更新されることをテスト
+
+- [] Enter キーを押すと送信関数が呼ばれることをテスト
+
+チェックボックスを切り替えたときに状態が正しく変わるかテスト
+
+### props のテスト
+
+- [] Greeting コンポーネントに message="Hi" を渡すと "Hi" が表示されることをテスト
+
+- [] props を省略した場合、デフォルト値が表示されることをテスト
+
+### コンテキストのテスト
+
+ThemeContext を作り、"dark" のとき背景が黒になることをテスト
+
+Provider を使わなかった場合、デフォルトテーマ "light" になることをテスト
+
+### 非同期処理のテスト
+
+- [] API モックを作り、データ取得後にリストが描画されることをテスト
+
+- [] API が失敗した場合、エラーメッセージが表示されることをテスト
+
+- [] データ取得中に "Loading…" が表示されることをテスト
+
+### 副作用 (useEffect) のテスト
+
+- [] 初回レンダリング時に fetchData が呼ばれることをテスト
+
+- [] アンマウント時に setInterval が解除されることをテスト
+
+### 特殊ケースのテスト
+
+- [] UserList に空配列を渡した場合 "No users found" が表示されることをテスト
+
+- [] null や undefined の props を渡したときに安全に動作することをテスト
+
+- [] エラーバウンダリで子コンポーネントがエラーを投げた場合、フォールバック UI が表示されることをテスト
+
+- [] ボタンに role="button" が存在することをテスト（アクセシビリティ確認）
+
+### ✅ 学習ロードマップ（おすすめ順）
+
+- ロジック → 状態 → 描画 → イベント（基礎）
+
+- props → コンテキスト → 非同期処理（実務でよく出る）
+
+- 副作用 → 特殊ケース（応用・品質向上）
