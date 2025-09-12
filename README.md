@@ -3,7 +3,7 @@
 使用技術
 
 - テストランナー：vitest
-- テンティングライブラリ：react-testing-library
+- テスティングライブラリ：react-testing-library
 
 単体テストの種類
 
@@ -20,7 +20,7 @@
 環境
 
 - vite, vitest
-- テストティングライブラリ：react-testing-library
+- テスティングライブラリ：react-testing-library
 
 テストを走らせるところまでやる
 
