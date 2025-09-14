@@ -59,7 +59,7 @@
 
 - [x] UserList コンポーネントで users.length=3 のとき `<li>` が 3 つ表示されることをテスト
 
-- [] 条件分岐（例: loading=true → "Loading…" 表示、false → データ表示）をテスト
+- [x] 条件分岐（例: loading=true → "Loading…" 表示、false → データ表示）をテスト
 
 ### イベントのテスト
 
