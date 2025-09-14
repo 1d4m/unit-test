@@ -55,7 +55,7 @@
 
 ### 描画 (rendering) のテスト
 
-- [] Hello コンポーネントに name props を渡して "Hello, {name}" が表示されることをテスト
+- [x] Hello コンポーネントに name props を渡して "Hello, {name}" が表示されることをテスト
 
 - [] UserList コンポーネントで users.length=3 のとき <li> が 3 つ表示されることをテスト
 
