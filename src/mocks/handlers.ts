@@ -6,11 +6,6 @@ export const handlers = [
   http.get(`/articles`, async () => {
     await sleep(5000);
 
-    return HttpResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 } // ステータスコードを指定
-    );
-
     return HttpResponse.json([
       {
         id: "1",
